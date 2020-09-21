@@ -48,12 +48,12 @@ You can reach us at the email <ay2021s1-cs2103t-w16-3@googlegroups.com>
 * Role: Developer
 * Responsibilities: Documentation, Model, Logic
 
-### James Doe
+### Yong Ping
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yongping827.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yongping827)]
+[[portfolio](team/yongping827.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality, Storage
