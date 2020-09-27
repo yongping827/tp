@@ -32,7 +32,8 @@ public class TransactionTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // different phone and email -> returns false
-        Transaction editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        Transaction editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different name -> returns false

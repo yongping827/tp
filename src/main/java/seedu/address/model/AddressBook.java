@@ -77,7 +77,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given transaction {@code target} in the list with {@code editedTransaction}.
      * {@code target} must exist in the address book.
-     * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction in the address book.
+     * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction
+     * in the address book.
      */
     public void setPerson(Transaction target, Transaction editedTransaction) {
         requireNonNull(editedTransaction);

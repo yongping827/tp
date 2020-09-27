@@ -13,10 +13,11 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A transaction is considered unique by comparing using {@code Transaction#isSamePerson(Transaction)}. As such, adding and updating of
- * persons uses Transaction#isSamePerson(Transaction) for equality so as to ensure that the transaction being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a transaction uses Transaction#equals(Object) so
- * as to ensure that the transaction with exactly the same fields will be removed.
+ * A transaction is considered unique by comparing using {@code Transaction#isSamePerson(Transaction)}. As such,
+ * adding and updating of persons uses Transaction#isSamePerson(Transaction) for equality so as to ensure that the
+ * transaction being added or updated is unique in terms of identity in the UniquePersonList. However, the removal of
+ * a transaction uses Transaction#equals(Object) so as to ensure that the transaction with exactly the same fields
+ * will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -51,7 +52,8 @@ public class UniquePersonList implements Iterable<Transaction> {
     /**
      * Replaces the transaction {@code target} in the list with {@code editedTransaction}.
      * {@code target} must exist in the list.
-     * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction in the list.
+     * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction in
+     * the list.
      */
     public void setPerson(Transaction target, Transaction editedTransaction) {
         requireAllNonNull(target, editedTransaction);

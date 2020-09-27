@@ -19,8 +19,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Amount;
+import seedu.address.model.person.Date;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Transaction;
 import seedu.address.model.tag.Category;
 
 /**
@@ -87,7 +90,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Transaction} with the details of {@code transactionToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Transaction createEditedPerson(Transaction transactionToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Transaction createEditedPerson(Transaction transactionToEdit,
+                                                  EditPersonDescriptor editPersonDescriptor) {
         assert transactionToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(transactionToEdit.getName());

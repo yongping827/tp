@@ -189,7 +189,8 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Category> actualCategorySet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Category> expectedCategorySet = new HashSet<Category>(Arrays.asList(new Category(VALID_TAG_1), new Category(VALID_TAG_2)));
+        Set<Category> expectedCategorySet = new HashSet<Category>(Arrays.asList(new Category(VALID_TAG_1),
+                new Category(VALID_TAG_2)));
 
         assertEquals(expectedCategorySet, actualCategorySet);
     }

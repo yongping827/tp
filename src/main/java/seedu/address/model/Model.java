@@ -72,7 +72,8 @@ public interface Model {
     /**
      * Replaces the given transaction {@code target} with {@code editedTransaction}.
      * {@code target} must exist in the address book.
-     * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction in the address book.
+     * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction
+     * in the address book.
      */
     void setPerson(Transaction target, Transaction editedTransaction);
 

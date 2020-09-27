@@ -3,8 +3,11 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Amount;
+import seedu.address.model.person.Date;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Transaction;
 import seedu.address.model.tag.Category;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -55,7 +58,8 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code categories} into a {@code Set<Category>} and set it to the {@code Transaction} that we are building.
+     * Parses the {@code categories} into a {@code Set<Category>} and set it to the {@code Transaction} that we are
+     * building.
      */
     public PersonBuilder withTags(String ... categories) {
         this.categories = SampleDataUtil.getTagSet(categories);
