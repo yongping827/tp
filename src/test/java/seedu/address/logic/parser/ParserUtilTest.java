@@ -15,10 +15,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Amount;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Category;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -91,15 +91,15 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
+        Amount expectedAmount = new Amount(VALID_PHONE);
+        assertEquals(expectedAmount, ParserUtil.parsePhone(VALID_PHONE));
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+        Amount expectedAmount = new Amount(VALID_PHONE);
+        assertEquals(expectedAmount, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
     @Test
@@ -137,15 +137,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
+        Date expectedDate = new Date(VALID_EMAIL);
+        assertEquals(expectedDate, ParserUtil.parseEmail(VALID_EMAIL));
     }
 
     @Test
     public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+        Date expectedDate = new Date(VALID_EMAIL);
+        assertEquals(expectedDate, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
     @Test
@@ -160,15 +160,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+        Category expectedCategory = new Category(VALID_TAG_1);
+        assertEquals(expectedCategory, ParserUtil.parseTag(VALID_TAG_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+        Category expectedCategory = new Category(VALID_TAG_1);
+        assertEquals(expectedCategory, ParserUtil.parseTag(tagWithWhitespace));
     }
 
     @Test
@@ -188,9 +188,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Category> actualCategorySet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Set<Category> expectedCategorySet = new HashSet<Category>(Arrays.asList(new Category(VALID_TAG_1), new Category(VALID_TAG_2)));
 
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedCategorySet, actualCategorySet);
     }
 }

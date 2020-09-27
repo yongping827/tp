@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Transaction;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Transaction> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,35 +53,35 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a transaction with the same identity as {@code transaction} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasPerson(Transaction transaction);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given transaction.
+     * The transaction must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deletePerson(Transaction target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given transaction.
+     * {@code transaction} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addPerson(Transaction transaction);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given transaction {@code target} with {@code editedTransaction}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPerson(Transaction target, Transaction editedTransaction);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered transaction list */
+    ObservableList<Transaction> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered transaction list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPersonList(Predicate<Transaction> predicate);
 }

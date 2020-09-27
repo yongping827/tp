@@ -10,10 +10,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Amount;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Category;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -51,18 +51,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String phone} into a {@code Amount}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
+    public static Amount parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        if (!Amount.isValidPhone(trimmedPhone)) {
+            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new Amount(trimmedPhone);
     }
 
     /**
@@ -81,44 +81,44 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String email} into an {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
+    public static Date parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        if (!Date.isValidEmail(trimmedEmail)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Date(trimmedEmail);
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String tag} into a {@code Category}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Category parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        if (!Category.isValidTagName(trimmedTag)) {
+            throw new ParseException(Category.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Category(trimmedTag);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> tags} into a {@code Set<Category>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Category> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<Category> categorySet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            categorySet.add(parseTag(tagName));
         }
-        return tagSet;
+        return categorySet;
     }
 }

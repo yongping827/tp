@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Transaction;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -40,11 +40,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the transaction list with {@code transactions}.
+     * {@code transactions} must not contain duplicate transactions.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setPersons(List<Transaction> transactions) {
+        this.persons.setPersons(transactions);
     }
 
     /**
@@ -56,40 +56,40 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
-    //// person-level operations
+    //// transaction-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a transaction with the same identity as {@code transaction} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasPerson(Transaction transaction) {
+        requireNonNull(transaction);
+        return persons.contains(transaction);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a transaction to the address book.
+     * The transaction must not already exist in the address book.
      */
-    public void addPerson(Person p) {
+    public void addPerson(Transaction p) {
         persons.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given transaction {@code target} in the list with {@code editedTransaction}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setPerson(Transaction target, Transaction editedTransaction) {
+        requireNonNull(editedTransaction);
 
-        persons.setPerson(target, editedPerson);
+        persons.setPerson(target, editedTransaction);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
+    public void removePerson(Transaction key) {
         persons.remove(key);
     }
 
@@ -102,7 +102,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
+    public ObservableList<Transaction> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
 
