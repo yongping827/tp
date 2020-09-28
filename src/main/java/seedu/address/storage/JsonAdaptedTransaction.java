@@ -20,42 +20,42 @@ import seedu.address.model.tag.Category;
 /**
  * Jackson-friendly version of {@link Transaction}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedTransaction {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Transaction's %s field is missing!";
 
     private final String name;
-    private final String phone;
-    private final String email;
+    private final String amount;
+    private final String date;
     private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedCategory> categories = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given transaction details.
+     * Constructs a {@code JsonAdaptedTransaction} with the given transaction details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedTransaction(@JsonProperty("name") String name, @JsonProperty("amount") String amount,
+                                  @JsonProperty("date") String date, @JsonProperty("address") String address,
+                                  @JsonProperty("categories") List<JsonAdaptedCategory> categories) {
         this.name = name;
-        this.phone = phone;
-        this.email = email;
+        this.amount = amount;
+        this.date = date;
         this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (categories != null) {
+            this.categories.addAll(categories);
         }
     }
 
     /**
      * Converts a given {@code Transaction} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Transaction source) {
+    public JsonAdaptedTransaction(Transaction source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
+        amount = source.getAmount().value;
+        date = source.getDate().value;
         address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        categories.addAll(source.getCategories().stream()
+                .map(JsonAdaptedCategory::new)
                 .collect(Collectors.toList()));
     }
 
@@ -65,9 +65,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted transaction.
      */
     public Transaction toModelType() throws IllegalValueException {
-        final List<Category> personCategories = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personCategories.add(tag.toModelType());
+        final List<Category> transactionCategories = new ArrayList<>();
+        for (JsonAdaptedCategory category : categories) {
+            transactionCategories.add(category.toModelType());
         }
 
         if (name == null) {
@@ -78,21 +78,21 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
+        if (amount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Amount.class.getSimpleName()));
         }
-        if (!Amount.isValidPhone(phone)) {
+        if (!Amount.isValidAmount(amount)) {
             throw new IllegalValueException(Amount.MESSAGE_CONSTRAINTS);
         }
-        final Amount modelAmount = new Amount(phone);
+        final Amount modelAmount = new Amount(amount);
 
-        if (email == null) {
+        if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        if (!Date.isValidEmail(email)) {
+        if (!Date.isValidDate(date)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        final Date modelDate = new Date(email);
+        final Date modelDate = new Date(date);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
@@ -102,7 +102,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Category> modelCategories = new HashSet<>(personCategories);
+        final Set<Category> modelCategories = new HashSet<>(transactionCategories);
         return new Transaction(modelName, modelAmount, modelDate, modelAddress, modelCategories);
     }
 

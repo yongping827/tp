@@ -17,41 +17,41 @@ import seedu.address.model.tag.Category;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Transaction[] getSamplePersons() {
+    public static Transaction[] getSampleTransactions() {
         return new Transaction[] {
             new Transaction(new Name("Alex Yeoh"), new Amount("87438807"), new Date("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
+                getCategoriesSet("friends")),
             new Transaction(new Name("Bernice Yu"), new Amount("99272758"), new Date("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
+                getCategoriesSet("colleagues", "friends")),
             new Transaction(new Name("Charlotte Oliveiro"), new Amount("93210283"), new Date("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
+                getCategoriesSet("neighbours")),
             new Transaction(new Name("David Li"), new Amount("91031282"), new Date("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
+                getCategoriesSet("family")),
             new Transaction(new Name("Irfan Ibrahim"), new Amount("92492021"), new Date("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
+                getCategoriesSet("classmates")),
             new Transaction(new Name("Roy Balakrishnan"), new Amount("92624417"), new Date("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+                getCategoriesSet("colleagues"))
         };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Transaction sampleTransaction : getSamplePersons()) {
-            sampleAb.addPerson(sampleTransaction);
+        for (Transaction sampleTransaction : getSampleTransactions()) {
+            sampleAb.addTransaction(sampleTransaction);
         }
         return sampleAb;
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a category set containing the list of strings given.
      */
-    public static Set<Category> getTagSet(String... strings) {
+    public static Set<Category> getCategoriesSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Category::new)
                 .collect(Collectors.toSet());

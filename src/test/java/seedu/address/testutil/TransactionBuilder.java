@@ -14,11 +14,11 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Transaction objects.
  */
-public class PersonBuilder {
+public class TransactionBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
+    public static final String DEFAULT_AMOUNT = "85355255";
+    public static final String DEFAULT_DATE = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
@@ -28,31 +28,31 @@ public class PersonBuilder {
     private Set<Category> categories;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code TransactionBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public TransactionBuilder() {
         name = new Name(DEFAULT_NAME);
-        amount = new Amount(DEFAULT_PHONE);
-        date = new Date(DEFAULT_EMAIL);
+        amount = new Amount(DEFAULT_AMOUNT);
+        date = new Date(DEFAULT_DATE);
         address = new Address(DEFAULT_ADDRESS);
         categories = new HashSet<>();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code transactionToCopy}.
+     * Initializes the TransactionBuilder with the data of {@code transactionToCopy}.
      */
-    public PersonBuilder(Transaction transactionToCopy) {
+    public TransactionBuilder(Transaction transactionToCopy) {
         name = transactionToCopy.getName();
-        amount = transactionToCopy.getPhone();
-        date = transactionToCopy.getEmail();
+        amount = transactionToCopy.getAmount();
+        date = transactionToCopy.getDate();
         address = transactionToCopy.getAddress();
-        categories = new HashSet<>(transactionToCopy.getTags());
+        categories = new HashSet<>(transactionToCopy.getCategories());
     }
 
     /**
      * Sets the {@code Name} of the {@code Transaction} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public TransactionBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -61,15 +61,15 @@ public class PersonBuilder {
      * Parses the {@code categories} into a {@code Set<Category>} and set it to the {@code Transaction} that we are
      * building.
      */
-    public PersonBuilder withTags(String ... categories) {
-        this.categories = SampleDataUtil.getTagSet(categories);
+    public TransactionBuilder withCategories(String ... categories) {
+        this.categories = SampleDataUtil.getCategoriesSet(categories);
         return this;
     }
 
     /**
      * Sets the {@code Address} of the {@code Transaction} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public TransactionBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
@@ -77,16 +77,16 @@ public class PersonBuilder {
     /**
      * Sets the {@code Amount} of the {@code Transaction} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
-        this.amount = new Amount(phone);
+    public TransactionBuilder withAmount(String amount) {
+        this.amount = new Amount(amount);
         return this;
     }
 
     /**
      * Sets the {@code Date} of the {@code Transaction} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
-        this.date = new Date(email);
+    public TransactionBuilder withDate(String date) {
+        this.date = new Date(date);
         return this;
     }
 

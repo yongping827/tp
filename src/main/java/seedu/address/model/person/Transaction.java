@@ -40,11 +40,11 @@ public class Transaction {
         return name;
     }
 
-    public Amount getPhone() {
+    public Amount getAmount() {
         return amount;
     }
 
-    public Date getEmail() {
+    public Date getDate() {
         return date;
     }
 
@@ -53,30 +53,30 @@ public class Transaction {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable category set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Category> getTags() {
+    public Set<Category> getCategories() {
         return Collections.unmodifiableSet(categories);
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both transactions of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two transactions.
      */
-    public boolean isSamePerson(Transaction otherTransaction) {
+    public boolean isSameTransaction(Transaction otherTransaction) {
         if (otherTransaction == this) {
             return true;
         }
 
         return otherTransaction != null
                 && otherTransaction.getName().equals(getName())
-                && (otherTransaction.getPhone().equals(getPhone()) || otherTransaction.getEmail().equals(getEmail()));
+                && (otherTransaction.getAmount().equals(getAmount()) || otherTransaction.getDate().equals(getDate()));
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both transactions have the same identity and data fields.
+     * This defines a stronger notion of equality between two transactions.
      */
     @Override
     public boolean equals(Object other) {
@@ -90,10 +90,10 @@ public class Transaction {
 
         Transaction otherTransaction = (Transaction) other;
         return otherTransaction.getName().equals(getName())
-                && otherTransaction.getPhone().equals(getPhone())
-                && otherTransaction.getEmail().equals(getEmail())
+                && otherTransaction.getAmount().equals(getAmount())
+                && otherTransaction.getDate().equals(getDate())
                 && otherTransaction.getAddress().equals(getAddress())
-                && otherTransaction.getTags().equals(getTags());
+                && otherTransaction.getCategories().equals(getCategories());
     }
 
     @Override
@@ -107,13 +107,13 @@ public class Transaction {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append(" Amount: ")
-                .append(getPhone())
+                .append(getAmount())
                 .append(" Date: ")
-                .append(getEmail())
+                .append(getDate())
                 .append(" Address: ")
                 .append(getAddress())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(" Categories: ");
+        getCategories().forEach(builder::append);
         return builder.toString();
     }
 

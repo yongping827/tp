@@ -4,32 +4,32 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Transaction's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents a Transaction's amount in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAmount(String)}
  */
 public class Amount {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Amount numbers should only contain numbers, and it should be at least 3 digits long";
+            "Amounts should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
     public final String value;
 
     /**
      * Constructs a {@code Amount}.
      *
-     * @param phone A valid phone number.
+     * @param amount A valid amount.
      */
-    public Amount(String phone) {
-        requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+    public Amount(String amount) {
+        requireNonNull(amount);
+        checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
+        value = amount;
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid amount.
      */
-    public static boolean isValidPhone(String test) {
+    public static boolean isValidAmount(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

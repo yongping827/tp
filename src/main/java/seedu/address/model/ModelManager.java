@@ -34,7 +34,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredTransactions = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTransactions = new FilteredList<>(this.addressBook.getTransactionList());
     }
 
     public ModelManager() {
@@ -89,27 +89,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Transaction transaction) {
+    public boolean hasTransaction(Transaction transaction) {
         requireNonNull(transaction);
-        return addressBook.hasPerson(transaction);
+        return addressBook.hasTransaction(transaction);
     }
 
     @Override
-    public void deletePerson(Transaction target) {
-        addressBook.removePerson(target);
+    public void deleteTransaction(Transaction target) {
+        addressBook.removeTransaction(target);
     }
 
     @Override
-    public void addPerson(Transaction transaction) {
-        addressBook.addPerson(transaction);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addTransaction(Transaction transaction) {
+        addressBook.addTransaction(transaction);
+        updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
     }
 
     @Override
-    public void setPerson(Transaction target, Transaction editedTransaction) {
+    public void setTransaction(Transaction target, Transaction editedTransaction) {
         requireAllNonNull(target, editedTransaction);
 
-        addressBook.setPerson(target, editedTransaction);
+        addressBook.setTransaction(target, editedTransaction);
     }
 
     //=========== Filtered Transaction List Accessors =============================================================
@@ -119,12 +119,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Transaction> getFilteredPersonList() {
+    public ObservableList<Transaction> getFilteredTransactionList() {
         return filteredTransactions;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Transaction> predicate) {
+    public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
         requireNonNull(predicate);
         filteredTransactions.setPredicate(predicate);
     }

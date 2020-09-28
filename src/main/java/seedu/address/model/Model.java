@@ -12,7 +12,7 @@ import seedu.address.model.person.Transaction;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Transaction> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Transaction> PREDICATE_SHOW_ALL_TRANSACTIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -55,19 +55,19 @@ public interface Model {
     /**
      * Returns true if a transaction with the same identity as {@code transaction} exists in the address book.
      */
-    boolean hasPerson(Transaction transaction);
+    boolean hasTransaction(Transaction transaction);
 
     /**
      * Deletes the given transaction.
      * The transaction must exist in the address book.
      */
-    void deletePerson(Transaction target);
+    void deleteTransaction(Transaction target);
 
     /**
      * Adds the given transaction.
      * {@code transaction} must not already exist in the address book.
      */
-    void addPerson(Transaction transaction);
+    void addTransaction(Transaction transaction);
 
     /**
      * Replaces the given transaction {@code target} with {@code editedTransaction}.
@@ -75,14 +75,14 @@ public interface Model {
      * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction
      * in the address book.
      */
-    void setPerson(Transaction target, Transaction editedTransaction);
+    void setTransaction(Transaction target, Transaction editedTransaction);
 
     /** Returns an unmodifiable view of the filtered transaction list */
-    ObservableList<Transaction> getFilteredPersonList();
+    ObservableList<Transaction> getFilteredTransactionList();
 
     /**
      * Updates the filter of the filtered transaction list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Transaction> predicate);
+    void updateFilteredTransactionList(Predicate<Transaction> predicate);
 }

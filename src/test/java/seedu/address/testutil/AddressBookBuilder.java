@@ -6,7 +6,7 @@ import seedu.address.model.person.Transaction;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code AddressBook ab = new AddressBookBuilder().withTransaction("John", "Doe").build();}
  */
 public class AddressBookBuilder {
 
@@ -23,8 +23,8 @@ public class AddressBookBuilder {
     /**
      * Adds a new {@code Transaction} to the {@code AddressBook} that we are building.
      */
-    public AddressBookBuilder withPerson(Transaction transaction) {
-        addressBook.addPerson(transaction);
+    public AddressBookBuilder withTransaction(Transaction transaction) {
+        addressBook.addTransaction(transaction);
         return this;
     }
 

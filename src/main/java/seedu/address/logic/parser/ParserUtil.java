@@ -51,18 +51,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Amount}.
+     * Parses a {@code String amount} into a {@code Amount}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code amount} is invalid.
      */
-    public static Amount parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Amount.isValidPhone(trimmedPhone)) {
+    public static Amount parseAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
+        if (!Amount.isValidAmount(trimmedAmount)) {
             throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
         }
-        return new Amount(trimmedPhone);
+        return new Amount(trimmedAmount);
     }
 
     /**
@@ -81,43 +81,43 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Date}.
+     * Parses a {@code String date} into an {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Date.isValidEmail(trimmedEmail)) {
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Date(trimmedEmail);
+        return new Date(trimmedDate);
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Category}.
+     * Parses a {@code String category} into a {@code Category}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code category} is invalid.
      */
-    public static Category parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Category.isValidTagName(trimmedTag)) {
+    public static Category parseCategory(String category) throws ParseException {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
+        if (!Category.isValidCategoryName(trimmedCategory)) {
             throw new ParseException(Category.MESSAGE_CONSTRAINTS);
         }
-        return new Category(trimmedTag);
+        return new Category(trimmedCategory);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Category>}.
+     * Parses {@code Collection<String> categories} into a {@code Set<Category>}.
      */
-    public static Set<Category> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
+    public static Set<Category> parseCategories(Collection<String> categories) throws ParseException {
+        requireNonNull(categories);
         final Set<Category> categorySet = new HashSet<>();
-        for (String tagName : tags) {
-            categorySet.add(parseTag(tagName));
+        for (String categoryName : categories) {
+            categorySet.add(parseCategory(categoryName));
         }
         return categorySet;
     }

@@ -14,27 +14,27 @@ public class AmountTest {
     }
 
     @Test
-    public void constructor_invalidPhone_throwsIllegalArgumentException() {
-        String invalidPhone = "";
-        assertThrows(IllegalArgumentException.class, () -> new Amount(invalidPhone));
+    public void constructor_invalidAmount_throwsIllegalArgumentException() {
+        String invalidAmount = "";
+        assertThrows(IllegalArgumentException.class, () -> new Amount(invalidAmount));
     }
 
     @Test
-    public void isValidPhone() {
-        // null phone number
-        assertThrows(NullPointerException.class, () -> Amount.isValidPhone(null));
+    public void isValidAmount() {
+        // null amount
+        assertThrows(NullPointerException.class, () -> Amount.isValidAmount(null));
 
-        // invalid phone numbers
-        assertFalse(Amount.isValidPhone("")); // empty string
-        assertFalse(Amount.isValidPhone(" ")); // spaces only
-        assertFalse(Amount.isValidPhone("91")); // less than 3 numbers
-        assertFalse(Amount.isValidPhone("phone")); // non-numeric
-        assertFalse(Amount.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Amount.isValidPhone("9312 1534")); // spaces within digits
+        // invalid amounts
+        assertFalse(Amount.isValidAmount("")); // empty string
+        assertFalse(Amount.isValidAmount(" ")); // spaces only
+        assertFalse(Amount.isValidAmount("91")); // less than 3 numbers
+        assertFalse(Amount.isValidAmount("phone")); // non-numeric
+        assertFalse(Amount.isValidAmount("9011p041")); // alphabets within digits
+        assertFalse(Amount.isValidAmount("9312 1534")); // spaces within digits
 
-        // valid phone numbers
-        assertTrue(Amount.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(Amount.isValidPhone("93121534"));
-        assertTrue(Amount.isValidPhone("124293842033123")); // long phone numbers
+        // valid amounts
+        assertTrue(Amount.isValidAmount("911")); // exactly 3 numbers
+        assertTrue(Amount.isValidAmount("93121534"));
+        assertTrue(Amount.isValidAmount("124293842033123")); // long amount values
     }
 }

@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalTransactions.ALICE;
+import static seedu.address.testutil.TypicalTransactions.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,156 +15,158 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.person.exceptions.DuplicateTransactionException;
+import seedu.address.model.person.exceptions.TransactionNotFoundException;
+import seedu.address.testutil.TransactionBuilder;
 
 public class UniqueTransactionListTest {
 
-    private final UniquePersonList uniquePersonList = new UniquePersonList();
+    private final UniqueTransactionList uniqueTransactionList = new UniqueTransactionList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.contains(null));
+    public void contains_nullTransaction_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueTransactionList.contains(null));
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
-        assertFalse(uniquePersonList.contains(ALICE));
+    public void contains_transactionNotInList_returnsFalse() {
+        assertFalse(uniqueTransactionList.contains(ALICE));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
-        uniquePersonList.add(ALICE);
-        assertTrue(uniquePersonList.contains(ALICE));
+    public void contains_transactionInList_returnsTrue() {
+        uniqueTransactionList.add(ALICE);
+        assertTrue(uniqueTransactionList.contains(ALICE));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
-        uniquePersonList.add(ALICE);
-        Transaction editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(uniquePersonList.contains(editedAlice));
+    public void contains_transactionWithSameIdentityFieldsInList_returnsTrue() {
+        uniqueTransactionList.add(ALICE);
+        Transaction editedAlice = new TransactionBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withCategories(VALID_CATEGORY_HUSBAND).build();
+        assertTrue(uniqueTransactionList.contains(editedAlice));
     }
 
     @Test
-    public void add_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
+    public void add_nullTransaction_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueTransactionList.add(null));
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
-        uniquePersonList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+    public void add_duplicateTransaction_throwsDuplicateTransactionException() {
+        uniqueTransactionList.add(ALICE);
+        assertThrows(DuplicateTransactionException.class, () -> uniqueTransactionList.add(ALICE));
     }
 
     @Test
-    public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPerson(null, ALICE));
+    public void setTransaction_nullTargetTransaction_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueTransactionList.setTransaction(null, ALICE));
     }
 
     @Test
-    public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPerson(ALICE, null));
+    public void setTransaction_nullEditedTransaction_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueTransactionList.setTransaction(ALICE, null));
     }
 
     @Test
-    public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.setPerson(ALICE, ALICE));
+    public void setTransaction_targetTransactionNotInList_throwsTransactionNotFoundException() {
+        assertThrows(TransactionNotFoundException.class, () -> uniqueTransactionList.setTransaction(ALICE, ALICE));
     }
 
     @Test
-    public void setPerson_editedPersonIsSamePerson_success() {
-        uniquePersonList.add(ALICE);
-        uniquePersonList.setPerson(ALICE, ALICE);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(ALICE);
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+    public void setTransaction_editedTransactionIsSameTransaction_success() {
+        uniqueTransactionList.add(ALICE);
+        uniqueTransactionList.setTransaction(ALICE, ALICE);
+        UniqueTransactionList expectedUniqueTransactionList = new UniqueTransactionList();
+        expectedUniqueTransactionList.add(ALICE);
+        assertEquals(expectedUniqueTransactionList, uniqueTransactionList);
     }
 
     @Test
-    public void setPerson_editedPersonHasSameIdentity_success() {
-        uniquePersonList.add(ALICE);
-        Transaction editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        uniquePersonList.setPerson(ALICE, editedAlice);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(editedAlice);
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+    public void setTransaction_editedTransactionHasSameIdentity_success() {
+        uniqueTransactionList.add(ALICE);
+        Transaction editedAlice = new TransactionBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withCategories(VALID_CATEGORY_HUSBAND).build();
+        uniqueTransactionList.setTransaction(ALICE, editedAlice);
+        UniqueTransactionList expectedUniqueTransactionList = new UniqueTransactionList();
+        expectedUniqueTransactionList.add(editedAlice);
+        assertEquals(expectedUniqueTransactionList, uniqueTransactionList);
     }
 
     @Test
-    public void setPerson_editedPersonHasDifferentIdentity_success() {
-        uniquePersonList.add(ALICE);
-        uniquePersonList.setPerson(ALICE, BOB);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(BOB);
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+    public void setTransaction_editedTransactionHasDifferentIdentity_success() {
+        uniqueTransactionList.add(ALICE);
+        uniqueTransactionList.setTransaction(ALICE, BOB);
+        UniqueTransactionList expectedUniqueTransactionList = new UniqueTransactionList();
+        expectedUniqueTransactionList.add(BOB);
+        assertEquals(expectedUniqueTransactionList, uniqueTransactionList);
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
-        uniquePersonList.add(ALICE);
-        uniquePersonList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+    public void setTransaction_editedTransactionHasNonUniqueIdentity_throwsDuplicateTransactionException() {
+        uniqueTransactionList.add(ALICE);
+        uniqueTransactionList.add(BOB);
+        assertThrows(DuplicateTransactionException.class, () -> uniqueTransactionList.setTransaction(ALICE, BOB));
     }
 
     @Test
-    public void remove_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.remove(null));
+    public void remove_nullTransaction_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueTransactionList.remove(null));
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.remove(ALICE));
+    public void remove_transactionDoesNotExist_throwsTransactionNotFoundException() {
+        assertThrows(TransactionNotFoundException.class, () -> uniqueTransactionList.remove(ALICE));
     }
 
     @Test
-    public void remove_existingPerson_removesPerson() {
-        uniquePersonList.add(ALICE);
-        uniquePersonList.remove(ALICE);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+    public void remove_existingTransaction_removesTransaction() {
+        uniqueTransactionList.add(ALICE);
+        uniqueTransactionList.remove(ALICE);
+        UniqueTransactionList expectedUniqueTransactionList = new UniqueTransactionList();
+        assertEquals(expectedUniqueTransactionList, uniqueTransactionList);
     }
 
     @Test
-    public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((UniquePersonList) null));
+    public void setTransactions_nullUniqueTransactionList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, ()
+            -> uniqueTransactionList.setTransactions((UniqueTransactionList) null));
     }
 
     @Test
-    public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
-        uniquePersonList.add(ALICE);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(BOB);
-        uniquePersonList.setPersons(expectedUniquePersonList);
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+    public void setTransactions_uniqueTransactionList_replacesOwnListWithProvidedUniqueTransactionList() {
+        uniqueTransactionList.add(ALICE);
+        UniqueTransactionList expectedUniqueTransactionList = new UniqueTransactionList();
+        expectedUniqueTransactionList.add(BOB);
+        uniqueTransactionList.setTransactions(expectedUniqueTransactionList);
+        assertEquals(expectedUniqueTransactionList, uniqueTransactionList);
     }
 
     @Test
-    public void setPersons_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((List<Transaction>) null));
+    public void setTransactions_nullList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueTransactionList.setTransactions((List<Transaction>) null));
     }
 
     @Test
-    public void setPersons_list_replacesOwnListWithProvidedList() {
-        uniquePersonList.add(ALICE);
+    public void setTransactions_list_replacesOwnListWithProvidedList() {
+        uniqueTransactionList.add(ALICE);
         List<Transaction> transactionList = Collections.singletonList(BOB);
-        uniquePersonList.setPersons(transactionList);
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(BOB);
-        assertEquals(expectedUniquePersonList, uniquePersonList);
+        uniqueTransactionList.setTransactions(transactionList);
+        UniqueTransactionList expectedUniqueTransactionList = new UniqueTransactionList();
+        expectedUniqueTransactionList.add(BOB);
+        assertEquals(expectedUniqueTransactionList, uniqueTransactionList);
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
+    public void setTransacions_listWithDuplicateTransactions_throwsDuplicateTransactionException() {
         List<Transaction> listWithDuplicateTransactions = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicateTransactions));
+        assertThrows(DuplicateTransactionException.class, ()
+            -> uniqueTransactionList.setTransactions(listWithDuplicateTransactions));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+            -> uniqueTransactionList.asUnmodifiableObservableList().remove(0));
     }
 }

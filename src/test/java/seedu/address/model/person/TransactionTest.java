@@ -3,62 +3,63 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalTransactions.ALICE;
+import static seedu.address.testutil.TypicalTransactions.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TransactionBuilder;
 
 public class TransactionTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Transaction transaction = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> transaction.getTags().remove(0));
+        Transaction transaction = new TransactionBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> transaction.getCategories().remove(0));
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameTransaction() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(ALICE.isSameTransaction(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(ALICE.isSameTransaction(null));
 
-        // different phone and email -> returns false
-        Transaction editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        // different amount and date -> returns false
+        Transaction editedAlice = new TransactionBuilder(ALICE).withAmount(VALID_AMOUNT_BOB)
+                .withDate(VALID_DATE_BOB).build();
+        assertFalse(ALICE.isSameTransaction(editedAlice));
 
         // different name -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        editedAlice = new TransactionBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.isSameTransaction(editedAlice));
 
-        // same name, same phone, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        // same name, same amount, different attributes -> returns true
+        editedAlice = new TransactionBuilder(ALICE).withDate(VALID_DATE_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withCategories(VALID_CATEGORY_HUSBAND).build();
+        assertTrue(ALICE.isSameTransaction(editedAlice));
 
-        // same name, same email, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        // same name, same date, different attributes -> returns true
+        editedAlice = new TransactionBuilder(ALICE).withAmount(VALID_AMOUNT_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withCategories(VALID_CATEGORY_HUSBAND).build();
+        assertTrue(ALICE.isSameTransaction(editedAlice));
 
-        // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        // same name, same amount, same date, different attributes -> returns true
+        editedAlice = new TransactionBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withCategories(VALID_CATEGORY_HUSBAND).build();
+        assertTrue(ALICE.isSameTransaction(editedAlice));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Transaction aliceCopy = new PersonBuilder(ALICE).build();
+        Transaction aliceCopy = new TransactionBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
@@ -74,23 +75,23 @@ public class TransactionTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Transaction editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Transaction editedAlice = new TransactionBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        // different amounts -> returns false
+        editedAlice = new TransactionBuilder(ALICE).withAmount(VALID_AMOUNT_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        // different dates -> returns false
+        editedAlice = new TransactionBuilder(ALICE).withDate(VALID_DATE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        editedAlice = new TransactionBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        // different categories -> returns false
+        editedAlice = new TransactionBuilder(ALICE).withCategories(VALID_CATEGORY_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

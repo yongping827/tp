@@ -12,9 +12,9 @@ import seedu.address.model.person.Transaction;
 /**
  * An UI component that displays information of a {@code Transaction}.
  */
-public class PersonCard extends UiPart<Region> {
+public class TransactionCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TransactionListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -33,28 +33,28 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label amount;
     @FXML
     private Label address;
     @FXML
-    private Label email;
+    private Label date;
     @FXML
     private FlowPane categories;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Transaction} and index to display.
+     * Creates a {@code TransactionCard} with the given {@code Transaction} and index to display.
      */
-    public PersonCard(Transaction transaction, int displayedIndex) {
+    public TransactionCard(Transaction transaction, int displayedIndex) {
         super(FXML);
         this.transaction = transaction;
         id.setText(displayedIndex + ". ");
         name.setText(transaction.getName().fullName);
-        phone.setText(transaction.getPhone().value);
+        amount.setText(transaction.getAmount().value);
         address.setText(transaction.getAddress().value);
-        email.setText(transaction.getEmail().value);
-        transaction.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> categories.getChildren().add(new Label(tag.tagName)));
+        date.setText(transaction.getDate().value);
+        transaction.getCategories().stream()
+                .sorted(Comparator.comparing(category -> category.categoryName))
+                .forEach(category -> categories.getChildren().add(new Label(category.categoryName)));
     }
 
     @Override
@@ -65,12 +65,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof TransactionCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        TransactionCard card = (TransactionCard) other;
         return id.getText().equals(card.id.getText())
                 && transaction.equals(card.transaction);
     }

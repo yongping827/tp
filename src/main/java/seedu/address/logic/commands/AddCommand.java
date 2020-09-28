@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -21,10 +21,10 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a transaction to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_AMOUNT + "PHONE "
-            + PREFIX_DATE + "EMAIL "
+            + PREFIX_AMOUNT + "AMOUNT "
+            + PREFIX_DATE + "DATE "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_CATEGORY + "TAG]...\n"
+            + "[" + PREFIX_CATEGORY + "CATEGORY]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_AMOUNT + "98765432 "
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_CATEGORY + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New transaction added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This transaction already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TRANSACTION = "This transaction already exists in the address book";
 
     private final Transaction toAdd;
 
@@ -50,11 +50,11 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasTransaction(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TRANSACTION);
         }
 
-        model.addPerson(toAdd);
+        model.addTransaction(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

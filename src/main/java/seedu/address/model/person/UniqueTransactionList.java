@@ -8,22 +8,22 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.exceptions.DuplicateTransactionException;
+import seedu.address.model.person.exceptions.TransactionNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A transaction is considered unique by comparing using {@code Transaction#isSamePerson(Transaction)}. As such,
- * adding and updating of persons uses Transaction#isSamePerson(Transaction) for equality so as to ensure that the
- * transaction being added or updated is unique in terms of identity in the UniquePersonList. However, the removal of
- * a transaction uses Transaction#equals(Object) so as to ensure that the transaction with exactly the same fields
- * will be removed.
+ * A list of transactions that enforces uniqueness between its elements and does not allow nulls.
+ * A transaction is considered unique by comparing using {@code Transaction#isSameTransaction(Transaction)}. As such,
+ * adding and updating of transactions uses Transaction#isSameTransaction(Transaction) for equality so as to ensure
+ * that the transaction being added or updated is unique in terms of identity in the UniqueTransactionList. However,
+ * the removal of a transaction uses Transaction#equals(Object) so as to ensure that the transaction with exactly the
+ * same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Transaction#isSamePerson(Transaction)
+ * @see Transaction#isSameTransaction(Transaction)
  */
-public class UniquePersonList implements Iterable<Transaction> {
+public class UniqueTransactionList implements Iterable<Transaction> {
 
     private final ObservableList<Transaction> internalList = FXCollections.observableArrayList();
     private final ObservableList<Transaction> internalUnmodifiableList =
@@ -34,7 +34,7 @@ public class UniquePersonList implements Iterable<Transaction> {
      */
     public boolean contains(Transaction toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameTransaction);
     }
 
     /**
@@ -44,7 +44,7 @@ public class UniquePersonList implements Iterable<Transaction> {
     public void add(Transaction toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateTransactionException();
         }
         internalList.add(toAdd);
     }
@@ -55,16 +55,16 @@ public class UniquePersonList implements Iterable<Transaction> {
      * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction in
      * the list.
      */
-    public void setPerson(Transaction target, Transaction editedTransaction) {
+    public void setTransaction(Transaction target, Transaction editedTransaction) {
         requireAllNonNull(target, editedTransaction);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new TransactionNotFoundException();
         }
 
-        if (!target.isSamePerson(editedTransaction) && contains(editedTransaction)) {
-            throw new DuplicatePersonException();
+        if (!target.isSameTransaction(editedTransaction) && contains(editedTransaction)) {
+            throw new DuplicateTransactionException();
         }
 
         internalList.set(index, editedTransaction);
@@ -77,11 +77,11 @@ public class UniquePersonList implements Iterable<Transaction> {
     public void remove(Transaction toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new TransactionNotFoundException();
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setTransactions(UniqueTransactionList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -90,10 +90,10 @@ public class UniquePersonList implements Iterable<Transaction> {
      * Replaces the contents of this list with {@code transactions}.
      * {@code transactions} must not contain duplicate transactions.
      */
-    public void setPersons(List<Transaction> transactions) {
+    public void setTransactions(List<Transaction> transactions) {
         requireAllNonNull(transactions);
-        if (!personsAreUnique(transactions)) {
-            throw new DuplicatePersonException();
+        if (!transactionsAreUnique(transactions)) {
+            throw new DuplicateTransactionException();
         }
 
         internalList.setAll(transactions);
@@ -114,8 +114,8 @@ public class UniquePersonList implements Iterable<Transaction> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniqueTransactionList // instanceof handles nulls
+                        && internalList.equals(((UniqueTransactionList) other).internalList));
     }
 
     @Override
@@ -126,10 +126,10 @@ public class UniquePersonList implements Iterable<Transaction> {
     /**
      * Returns true if {@code transactions} contains only unique transactions.
      */
-    private boolean personsAreUnique(List<Transaction> transactions) {
+    private boolean transactionsAreUnique(List<Transaction> transactions) {
         for (int i = 0; i < transactions.size() - 1; i++) {
             for (int j = i + 1; j < transactions.size(); j++) {
-                if (transactions.get(i).isSamePerson(transactions.get(j))) {
+                if (transactions.get(i).isSameTransaction(transactions.get(j))) {
                     return false;
                 }
             }

@@ -6,15 +6,15 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Transaction;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniqueTransactionList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameTransaction comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueTransactionList transactions;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,13 +24,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        transactions = new UniqueTransactionList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Transactions in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -43,8 +43,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the transaction list with {@code transactions}.
      * {@code transactions} must not contain duplicate transactions.
      */
-    public void setPersons(List<Transaction> transactions) {
-        this.persons.setPersons(transactions);
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions.setTransactions(transactions);
     }
 
     /**
@@ -53,7 +53,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setTransactions(newData.getTransactionList());
     }
 
     //// transaction-level operations
@@ -61,17 +61,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a transaction with the same identity as {@code transaction} exists in the address book.
      */
-    public boolean hasPerson(Transaction transaction) {
+    public boolean hasTransaction(Transaction transaction) {
         requireNonNull(transaction);
-        return persons.contains(transaction);
+        return transactions.contains(transaction);
     }
 
     /**
      * Adds a transaction to the address book.
      * The transaction must not already exist in the address book.
      */
-    public void addPerson(Transaction p) {
-        persons.add(p);
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
     }
 
     /**
@@ -80,42 +80,42 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction
      * in the address book.
      */
-    public void setPerson(Transaction target, Transaction editedTransaction) {
+    public void setTransaction(Transaction target, Transaction editedTransaction) {
         requireNonNull(editedTransaction);
 
-        persons.setPerson(target, editedTransaction);
+        transactions.setTransaction(target, editedTransaction);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Transaction key) {
-        persons.remove(key);
+    public void removeTransaction(Transaction key) {
+        transactions.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return transactions.asUnmodifiableObservableList().size() + " transactions";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Transaction> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Transaction> getTransactionList() {
+        return transactions.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && transactions.equals(((AddressBook) other).transactions));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return transactions.hashCode();
     }
 }
