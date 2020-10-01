@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Transaction's email in the address book.
+ * Represents a Transaction's date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
@@ -32,16 +32,16 @@ public class Date {
     /**
      * Constructs an {@code Date}.
      *
-     * @param email A valid email address.
+     * @param date A valid date.
      */
-    public Date(String email) {
-        requireNonNull(email);
-        checkArgument(isValidDate(email), MESSAGE_CONSTRAINTS);
-        value = email;
+    public Date(String date) {
+        requireNonNull(date);
+        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+        value = date;
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
         return test.matches(VALIDATION_REGEX);
