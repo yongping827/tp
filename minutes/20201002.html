@@ -8,7 +8,7 @@
 
   <link rel="stylesheet" href="/tp/assets/css/style.css">
 
-    <title>Minutes for 25 September 2020</title>
+    <title>Minutes for 2 October 2020</title>
   
 
 </head>
@@ -39,31 +39,97 @@
         <article class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Minutes for 25 September 2020</h1>
+    <h1 class="post-title">Minutes for 2 October 2020</h1>
   </header>
 
   <div class="post-content">
-    <p><em>*Foreword: Meetings have been shifted from Saturdays to Fridays</em></p>
+    <h3 id="standards-for-issues-and-prs">Standards for Issues and PRs</h3>
 
-<h3 id="tasks-for-v12-due-11th-october">Tasks for v1.2 (Due: 11th October)</h3>
-
+<p>Issues from user stories:</p>
 <ul>
-  <li>Renaming (Yong Ping)
+  <li>Refer to user story issue in body</li>
+  <li>Create at the start of each iteration, or at the end of each team meeting</li>
+</ul>
+
+<p>Issues from PRs or follow-up from other issues:</p>
+<ul>
+  <li>If you see a possible enhancement or problem while fixing your issue,
     <ul>
-      <li>Person → Transaction
+      <li>If it is dependent on your issue in some way, document it under your issue</li>
+      <li>If it is not dependent on your issue, create a new issue. Refer to the original issue if you want.</li>
+    </ul>
+  </li>
+  <li>If you want to add extensions to the issue in the same PR:
+    <ul>
+      <li>Create a new issue
         <ul>
-          <li>Name → Name</li>
-          <li>Phone → Amount</li>
-          <li>Tags → Category</li>
-          <li>Email → Date</li>
-          <li>Address → (deleted)</li>
+          <li>Rationale: So that others are aware you are working on this extension and will avoid unnecessary double work</li>
+        </ul>
+      </li>
+      <li>Add a new commit for the extension
+        <ul>
+          <li>Rationale: So it is captured in commit message when squashed</li>
+        </ul>
+      </li>
+      <li>Refer to it in the PR</li>
+    </ul>
+  </li>
+  <li>Definition of extension:
+    <ul>
+      <li>An enhancement that is not required to meet the specifications of the issue, that modifies the behavior of the program</li>
+      <li>Rationale:
+        <ul>
+          <li>Behavior changes must be closely monitored to prevent regressions from slipping past reviewers</li>
+          <li>Try to keep independent behavior changes apart from each other</li>
+        </ul>
+      </li>
+      <li>Definition of behavior:
+        <ul>
+          <li>CLI input or outputs change</li>
+          <li>GUI input or outputs change</li>
         </ul>
       </li>
     </ul>
   </li>
+</ul>
+
+<p>Changes not requiring issues:</p>
+<ul>
+  <li>Can be put under another PR or be a standalone PR without reference to issues
+    <ul>
+      <li>If put under another PR, put in a separate commit (so that it is captured in commit message when squashed)</li>
+    </ul>
+  </li>
+  <li>Examples:
+    <ul>
+      <li>Typos</li>
+      <li>Formatting / style changes</li>
+      <li>Anything under 10 lines not affecting behavior</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="tasks-for-v12-11th-october">Tasks for v1.2 (11th October)</h3>
+<p><em>updated</em></p>
+<ul>
+  <li>
+<del><em>Renaming (Yong Ping)</em></del>
+    <ul>
+      <li>
+<del><em>Person → Transaction</em></del>
+        <ul>
+          <li><del><em>Name → Name</em></del></li>
+          <li><del><em>Phone → Amount</em></del></li>
+          <li><del><em>Tags → Category</em></del></li>
+          <li><del><em>Email → Date</em></del></li>
+        </ul>
+      </li>
+      <li><del><em>Delete Address (Ian)</em></del></li>
+    </ul>
+  </li>
   <li>Slowly fix tests
     <ul>
-      <li>Test data for Name/Amount/Category</li>
+      <li>Test data for Description/Amount/Category</li>
     </ul>
   </li>
   <li>UI
@@ -71,10 +137,10 @@
       <li>Make it look like the mock-up (Siddarth)</li>
     </ul>
   </li>
-  <li>Models
+  <li>
+<del><em>Models</em></del>
     <ul>
-      <li>Set up expenses, income, etc once transaction is up (Jingjing)</li>
-      <li>Modify AB3 to accommodate two lists (expenses and income)</li>
+      <li><del><em>Set up expenses, income, etc, once transaction is up (Jingjing)</em></del></li>
     </ul>
   </li>
   <li>Commands
@@ -114,6 +180,7 @@
       <li>Viewing help: <code class="highlighter-rouge">help</code>
 </li>
       <li>Delete unused commands</li>
+      <li><em>Modify AddressBook to accommodate two lists (expenses and income)</em></li>
     </ul>
   </li>
   <li>Integration
@@ -128,6 +195,8 @@
     </ul>
   </li>
 </ul>
+
+<p><strong>Next meeting on Tuesday (6 Oct)</strong></p>
 
   </div>
 
