@@ -18,17 +18,17 @@ import ay2021s1_cs2103_w16_3.finesse.model.transaction.Transaction;
 public class SampleDataUtil {
     public static Transaction[] getSampleTransactions() {
         return new Transaction[] {
-            new Transaction(new Title("Alex Yeoh"), new Amount("87438807"), new Date("alexyeoh@example.com"),
+            new Transaction(new Title("Alex Yeoh"), new Amount("87438807"), new Date("01/01/2020"),
                 getCategoriesSet("friends")),
-            new Transaction(new Title("Bernice Yu"), new Amount("99272758"), new Date("berniceyu@example.com"),
+            new Transaction(new Title("Bernice Yu"), new Amount("99272758"), new Date("02/01/2020"),
                 getCategoriesSet("colleagues", "friends")),
-            new Transaction(new Title("Charlotte Oliveiro"), new Amount("93210283"), new Date("charlotte@example.com"),
+            new Transaction(new Title("Charlotte Oliveiro"), new Amount("93210283"), new Date("03/01/2020"),
                 getCategoriesSet("neighbours")),
-            new Transaction(new Title("David Li"), new Amount("91031282"), new Date("lidavid@example.com"),
+            new Transaction(new Title("David Li"), new Amount("91031282"), new Date("04/01/2020"),
                 getCategoriesSet("family")),
-            new Transaction(new Title("Irfan Ibrahim"), new Amount("92492021"), new Date("irfan@example.com"),
+            new Transaction(new Title("Irfan Ibrahim"), new Amount("92492021"), new Date("05/01/2020"),
                 getCategoriesSet("classmates")),
-            new Transaction(new Title("Roy Balakrishnan"), new Amount("92624417"), new Date("royb@example.com"),
+            new Transaction(new Title("Roy Balakrishnan"), new Amount("92624417"), new Date("06/01/2020"),
                 getCategoriesSet("colleagues"))
         };
     }
