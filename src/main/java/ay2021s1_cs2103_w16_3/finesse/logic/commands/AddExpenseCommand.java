@@ -45,7 +45,7 @@ public class AddExpenseCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        model.addTransaction(toAdd);
+        model.addExpense(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

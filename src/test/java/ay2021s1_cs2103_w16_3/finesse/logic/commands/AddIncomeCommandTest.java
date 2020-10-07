@@ -33,13 +33,13 @@ public class AddIncomeCommandTest {
 
     @Test
     public void execute_transactionAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingTransactionAdded modelStub = new ModelStubAcceptingTransactionAdded();
+        ModelStubAcceptingIncomeAdded modelStub = new ModelStubAcceptingIncomeAdded();
         Income validIncome = new TransactionBuilder().buildIncome();
 
         CommandResult commandResult = new AddIncomeCommand(validIncome).execute(modelStub);
 
         assertEquals(String.format(AddIncomeCommand.MESSAGE_SUCCESS, validIncome), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validIncome), modelStub.transactionsAdded);
+        assertEquals(Arrays.asList(validIncome), modelStub.incomesAdded);
     }
 
     @Test
@@ -189,13 +189,13 @@ public class AddIncomeCommandTest {
     /**
      * A Model stub that always accept the transaction being added.
      */
-    private class ModelStubAcceptingTransactionAdded extends ModelStub {
-        final ArrayList<Transaction> transactionsAdded = new ArrayList<>();
+    private class ModelStubAcceptingIncomeAdded extends ModelStub {
+        final ArrayList<Income> incomesAdded = new ArrayList<>();
 
         @Override
-        public void addTransaction(Transaction transaction) {
-            requireNonNull(transaction);
-            transactionsAdded.add(transaction);
+        public void addIncome(Income income) {
+            requireNonNull(income);
+            incomesAdded.add(income);
         }
 
         @Override
