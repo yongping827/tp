@@ -18,6 +18,8 @@ import ay2021s1_cs2103_w16_3.finesse.model.FinanceTracker;
 import ay2021s1_cs2103_w16_3.finesse.model.Model;
 import ay2021s1_cs2103_w16_3.finesse.model.ReadOnlyFinanceTracker;
 import ay2021s1_cs2103_w16_3.finesse.model.ReadOnlyUserPrefs;
+import ay2021s1_cs2103_w16_3.finesse.model.transaction.Expense;
+import ay2021s1_cs2103_w16_3.finesse.model.transaction.Income;
 import ay2021s1_cs2103_w16_3.finesse.model.transaction.Transaction;
 import ay2021s1_cs2103_w16_3.finesse.testutil.TransactionBuilder;
 import javafx.collections.ObservableList;
@@ -104,6 +106,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addExpense(Expense expense) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addIncome(Income income) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setFinanceTracker(ReadOnlyFinanceTracker newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -119,7 +131,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteExpense(Expense target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteIncome(Income target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setTransaction(Transaction target, Transaction editedTransaction) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setExpense(Expense target, Expense editedExpense) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setIncome(Income target, Income editedIncome) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -129,7 +161,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Expense> getFilteredExpenseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Income> getFilteredIncomeList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredExpenseList(Predicate<Transaction> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredIncomeList(Predicate<Transaction> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -1,6 +1,8 @@
 package ay2021s1_cs2103_w16_3.finesse.testutil;
 
 import ay2021s1_cs2103_w16_3.finesse.model.FinanceTracker;
+import ay2021s1_cs2103_w16_3.finesse.model.transaction.Expense;
+import ay2021s1_cs2103_w16_3.finesse.model.transaction.Income;
 import ay2021s1_cs2103_w16_3.finesse.model.transaction.Transaction;
 
 /**
@@ -23,6 +25,22 @@ public class FinanceTrackerBuilder {
      */
     public FinanceTrackerBuilder withTransaction(Transaction transaction) {
         financeTracker.addTransaction(transaction);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Transaction} to the {@code FinanceTracker} that we are building.
+     */
+    public FinanceTrackerBuilder withExpense(Expense expense) {
+        financeTracker.addExpense(expense);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Transaction} to the {@code FinanceTracker} that we are building.
+     */
+    public FinanceTrackerBuilder withIncome(Income income) {
+        financeTracker.addIncome(income);
         return this;
     }
 

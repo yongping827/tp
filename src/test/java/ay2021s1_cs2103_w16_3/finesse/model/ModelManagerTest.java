@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import ay2021s1_cs2103_w16_3.finesse.commons.core.GuiSettings;
 import ay2021s1_cs2103_w16_3.finesse.model.transaction.TitleContainsKeywordsPredicate;
 import ay2021s1_cs2103_w16_3.finesse.testutil.FinanceTrackerBuilder;
+import ay2021s1_cs2103_w16_3.finesse.testutil.TransactionBuilder;
 
 public class ModelManagerTest {
 
@@ -78,9 +79,22 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredExpenseList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredExpenseList().remove(0));
+    }
+
+    @Test
+    public void getFilteredIncomeList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredIncomeList().remove(0));
+    }
+
+    @Test
     public void equals() {
-        FinanceTracker financeTracker = new FinanceTrackerBuilder().withTransaction(ALICE)
-                .withTransaction(BENSON).build();
+        FinanceTracker financeTracker = new FinanceTrackerBuilder().withTransaction(ALICE).withTransaction(BENSON)
+                .withExpense(new TransactionBuilder(ALICE).buildExpense())
+                .withExpense(new TransactionBuilder(BENSON).buildExpense())
+                .withIncome(new TransactionBuilder(ALICE).buildIncome())
+                .withIncome(new TransactionBuilder(BENSON).buildIncome()).build();
         FinanceTracker differentFinanceTracker = new FinanceTracker();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -101,9 +115,18 @@ public class ModelManagerTest {
         // different financeTracker -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentFinanceTracker, userPrefs)));
 
-        // different filteredList -> returns false
         String[] keywords = ALICE.getTitle().fullTitle.split("\\s+");
+
+        // different filteredTransactionList -> returns false
         modelManager.updateFilteredTransactionList(new TitleContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(financeTracker, userPrefs)));
+
+        // different filteredExpenseList -> returns false
+        modelManager.updateFilteredExpenseList(new TitleContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(financeTracker, userPrefs)));
+
+        // different filteredIncomeList -> returns false
+        modelManager.updateFilteredIncomeList(new TitleContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(financeTracker, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
