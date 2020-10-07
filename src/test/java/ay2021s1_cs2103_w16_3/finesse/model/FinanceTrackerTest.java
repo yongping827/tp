@@ -34,4 +34,13 @@ public class FinanceTrackerTest {
         assertThrows(UnsupportedOperationException.class, () -> financeTracker.getTransactionList().remove(0));
     }
 
+    @Test
+    public void getExpenseList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> financeTracker.getExpenseList().remove(0));
+    }
+
+    @Test
+    public void getIncomeList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> financeTracker.getIncomeList().remove(0));
+    }
 }
