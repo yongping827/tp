@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import ay2021s1_cs2103_w16_3.finesse.commons.exceptions.IllegalValueException;
 import ay2021s1_cs2103_w16_3.finesse.model.FinanceTracker;
 import ay2021s1_cs2103_w16_3.finesse.model.ReadOnlyFinanceTracker;
+import ay2021s1_cs2103_w16_3.finesse.model.transaction.Expense;
+import ay2021s1_cs2103_w16_3.finesse.model.transaction.Income;
 import ay2021s1_cs2103_w16_3.finesse.model.transaction.Transaction;
 
 /**
@@ -20,13 +22,19 @@ import ay2021s1_cs2103_w16_3.finesse.model.transaction.Transaction;
 class JsonSerializableFinanceTracker {
 
     private final List<JsonAdaptedTransaction> transactions = new ArrayList<>();
+    private final List<JsonAdaptedExpense> expenses = new ArrayList<>();
+    private final List<JsonAdaptedIncome> incomes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableFinanceTracker} with the given transactions.
      */
     @JsonCreator
-    public JsonSerializableFinanceTracker(@JsonProperty("transactions") List<JsonAdaptedTransaction> transactions) {
+    public JsonSerializableFinanceTracker(@JsonProperty("transactions") List<JsonAdaptedTransaction> transactions,
+                                          @JsonProperty("expenses") List<JsonAdaptedExpense> expenses,
+                                          @JsonProperty("incomes") List<JsonAdaptedIncome> incomes) {
         this.transactions.addAll(transactions);
+        this.expenses.addAll(expenses);
+        this.incomes.addAll(incomes);
     }
 
     /**
@@ -36,6 +44,10 @@ class JsonSerializableFinanceTracker {
      */
     public JsonSerializableFinanceTracker(ReadOnlyFinanceTracker source) {
         transactions.addAll(source.getTransactionList().stream().map(JsonAdaptedTransaction::new)
+                .collect(Collectors.toList()));
+        expenses.addAll(source.getExpenseList().stream().map(JsonAdaptedExpense::new)
+                .collect(Collectors.toList()));
+        incomes.addAll(source.getIncomeList().stream().map(JsonAdaptedIncome::new)
                 .collect(Collectors.toList()));
     }
 
@@ -49,6 +61,14 @@ class JsonSerializableFinanceTracker {
         for (JsonAdaptedTransaction jsonAdaptedTransaction : transactions) {
             Transaction transaction = jsonAdaptedTransaction.toModelType();
             financeTracker.addTransaction(transaction);
+        }
+        for (JsonAdaptedExpense jsonAdaptedExpense : expenses) {
+            Expense expense = jsonAdaptedExpense.toModelType();
+            financeTracker.addExpense(expense);
+        }
+        for (JsonAdaptedIncome jsonAdaptedIncome : incomes) {
+            Income income = jsonAdaptedIncome.toModelType();
+            financeTracker.addIncome(income);
         }
         return financeTracker;
     }

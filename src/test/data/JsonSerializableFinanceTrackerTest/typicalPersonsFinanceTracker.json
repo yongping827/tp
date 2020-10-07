@@ -35,5 +35,77 @@
     "amount" : "7",
     "date" : "06/10/2020",
     "categories" : [ ]
+  } ],
+  "expenses" : [ {
+    "title" : "Alice Pauline",
+    "amount" : "$1",
+    "date" : "06/09/2020",
+    "categories" : [ "friends" ]
+  }, {
+    "title" : "Benson Meier",
+    "amount" : "2",
+    "date" : "05/10/2020",
+    "categories" : [ "owesMoney", "friends" ]
+  }, {
+    "title" : "Carl Kurz",
+    "amount" : "3.50",
+    "date" : "06/10/2020",
+    "categories" : [ ]
+  }, {
+    "title" : "Daniel Meier",
+    "amount" : "4",
+    "date" : "06/10/2020",
+    "categories" : [ "friends" ]
+  }, {
+    "title" : "Elle Meyer",
+    "amount" : "5",
+    "date" : "06/10/2020",
+    "categories" : [ ]
+  }, {
+    "title" : "Fiona Kunz",
+    "amount" : "6",
+    "date" : "06/10/2020",
+    "categories" : [ ]
+  }, {
+    "title" : "George Best",
+    "amount" : "7",
+    "date" : "06/10/2020",
+    "categories" : [ ]
+  } ],
+  "incomes" : [ {
+    "title" : "Alice Pauline",
+    "amount" : "$1",
+    "date" : "06/09/2020",
+    "categories" : [ "friends" ]
+  }, {
+    "title" : "Benson Meier",
+    "amount" : "2",
+    "date" : "05/10/2020",
+    "categories" : [ "owesMoney", "friends" ]
+  }, {
+    "title" : "Carl Kurz",
+    "amount" : "3.50",
+    "date" : "06/10/2020",
+    "categories" : [ ]
+  }, {
+    "title" : "Daniel Meier",
+    "amount" : "4",
+    "date" : "06/10/2020",
+    "categories" : [ "friends" ]
+  }, {
+    "title" : "Elle Meyer",
+    "amount" : "5",
+    "date" : "06/10/2020",
+    "categories" : [ ]
+  }, {
+    "title" : "Fiona Kunz",
+    "amount" : "6",
+    "date" : "06/10/2020",
+    "categories" : [ ]
+  }, {
+    "title" : "George Best",
+    "amount" : "7",
+    "date" : "06/10/2020",
+    "categories" : [ ]
   } ]
 }

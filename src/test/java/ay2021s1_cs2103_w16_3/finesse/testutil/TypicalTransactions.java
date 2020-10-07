@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import ay2021s1_cs2103_w16_3.finesse.model.FinanceTracker;
+import ay2021s1_cs2103_w16_3.finesse.model.transaction.Expense;
+import ay2021s1_cs2103_w16_3.finesse.model.transaction.Income;
 import ay2021s1_cs2103_w16_3.finesse.model.transaction.Transaction;
 
 /**
@@ -60,11 +62,29 @@ public class TypicalTransactions {
         FinanceTracker ft = new FinanceTracker();
         for (Transaction transaction : getTypicalTransactions()) {
             ft.addTransaction(transaction);
+            ft.addExpense(new TransactionBuilder(transaction).buildExpense());
+            ft.addIncome(new TransactionBuilder(transaction).buildIncome());
         }
         return ft;
     }
 
     public static List<Transaction> getTypicalTransactions() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Expense> getTypicalExpenses() {
+        List<Expense> typicalExpenses = new ArrayList<>();
+        for (Transaction transaction : getTypicalTransactions()) {
+            typicalExpenses.add(new TransactionBuilder(transaction).buildExpense());
+        }
+        return typicalExpenses;
+    }
+
+    public static List<Income> getTypicalIncomes() {
+        List<Income> typicalIncomes = new ArrayList<>();
+        for (Transaction transaction : getTypicalTransactions()) {
+            typicalIncomes.add(new TransactionBuilder(transaction).buildIncome());
+        }
+        return typicalIncomes;
     }
 }
