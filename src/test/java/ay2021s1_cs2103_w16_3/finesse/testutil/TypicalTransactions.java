@@ -79,7 +79,7 @@ public class TypicalTransactions {
                 .map(TransactionBuilder::buildExpense)
                 .collect(Collectors.toList());
     }
-    
+
     public static List<Income> getTypicalIncomes() {
         return getTypicalTransactions().stream()
                 .map(TransactionBuilder::new)
