@@ -12,6 +12,7 @@ import static ay2021s1_cs2103_w16_3.finesse.logic.commands.CommandTestUtil.VALID
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import ay2021s1_cs2103_w16_3.finesse.model.FinanceTracker;
 import ay2021s1_cs2103_w16_3.finesse.model.transaction.Expense;
@@ -73,18 +74,15 @@ public class TypicalTransactions {
     }
 
     public static List<Expense> getTypicalExpenses() {
-        List<Expense> typicalExpenses = new ArrayList<>();
-        for (Transaction transaction : getTypicalTransactions()) {
-            typicalExpenses.add(new TransactionBuilder(transaction).buildExpense());
-        }
-        return typicalExpenses;
+        return getTypicalTransactions().stream()
+                .map(TransactionBuilder::new)
+                .map(TransactionBuilder::buildExpense)
+                .collect(Collectors.toList());
     }
-
     public static List<Income> getTypicalIncomes() {
-        List<Income> typicalIncomes = new ArrayList<>();
-        for (Transaction transaction : getTypicalTransactions()) {
-            typicalIncomes.add(new TransactionBuilder(transaction).buildIncome());
-        }
-        return typicalIncomes;
+        return getTypicalTransactions().stream()
+                .map(TransactionBuilder::new)
+                .map(TransactionBuilder::buildIncome)
+                .collect(Collectors.toList());
     }
 }
