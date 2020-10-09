@@ -34,7 +34,7 @@ public class AddIncomeCommand extends Command {
     private final Income toAdd;
 
     /**
-     * Creates an AddIncomeCommand to add the specified {@code Income}
+     * Creates an AddIncomeCommand to add the specified {@code Income}.
      */
     public AddIncomeCommand(Income income) {
         requireNonNull(income);

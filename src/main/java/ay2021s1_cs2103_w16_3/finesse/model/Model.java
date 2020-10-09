@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /** {@code Predicate} that always evaluate to true. */
     Predicate<Transaction> PREDICATE_SHOW_ALL_TRANSACTIONS = unused -> true;
 
     /**
@@ -105,13 +105,13 @@ public interface Model {
      */
     void setIncome(Income target, Income editedIncome);
 
-    /** Returns an unmodifiable view of the filtered transaction list */
+    /** Returns an unmodifiable view of the filtered transaction list. */
     ObservableList<Transaction> getFilteredTransactionList();
 
-    /** Returns an unmodifiable view of the filtered expense list */
+    /** Returns an unmodifiable view of the filtered expense list. */
     ObservableList<Expense> getFilteredExpenseList();
 
-    /** Returns an unmodifiable view of the filtered income list */
+    /** Returns an unmodifiable view of the filtered income list. */
     ObservableList<Income> getFilteredIncomeList();
 
     /**

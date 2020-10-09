@@ -151,8 +151,8 @@ public class ModelManager implements Model {
     //=========== Filtered Transaction List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of
-     * {@code versionedFinanceTracker}
+     * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal transaction list of
+     * {@code versionedFinanceTracker}.
      */
     @Override
     public ObservableList<Transaction> getFilteredTransactionList() {
@@ -160,8 +160,8 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Expense} backed by the internal list of
-     * {@code versionedFinanceTracker}
+     * Returns an unmodifiable view of the list of {@code Expense} backed by the internal expense list of
+     * {@code versionedFinanceTracker}.
      */
     @Override
     public ObservableList<Expense> getFilteredExpenseList() {
@@ -169,8 +169,8 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Income} backed by the internal list of
-     * {@code versionedFinanceTracker}
+     * Returns an unmodifiable view of the list of {@code Income} backed by the internal income list of
+     * {@code versionedFinanceTracker}.
      */
     @Override
     public ObservableList<Income> getFilteredIncomeList() {

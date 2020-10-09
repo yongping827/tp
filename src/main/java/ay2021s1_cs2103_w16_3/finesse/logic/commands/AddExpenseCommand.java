@@ -34,7 +34,7 @@ public class AddExpenseCommand extends Command {
     private final Expense toAdd;
 
     /**
-     * Creates an AddExpenseCommand to add the specified {@code Expense}
+     * Creates an AddExpenseCommand to add the specified {@code Expense}.
      */
     public AddExpenseCommand(Expense expense) {
         requireNonNull(expense);
