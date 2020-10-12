@@ -61,11 +61,9 @@ public class TypicalTransactions {
      */
     public static FinanceTracker getTypicalFinanceTracker() {
         FinanceTracker ft = new FinanceTracker();
-        for (Transaction transaction : getTypicalTransactions()) {
-            ft.addTransaction(transaction);
-            ft.addExpense(new TransactionBuilder(transaction).buildExpense());
-            ft.addIncome(new TransactionBuilder(transaction).buildIncome());
-        }
+        getTypicalTransactions().forEach(ft::addTransaction);
+        getTypicalExpenses().forEach(ft::addExpense);
+        getTypicalIncomes().forEach(ft::addIncome);
         return ft;
     }
 
